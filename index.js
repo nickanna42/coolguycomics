@@ -22,7 +22,7 @@ app.set('view engine', '.hbs');
 app.use(express.static('public', {'extensions': ['html', 'htm']}));
 var objectifyRoutes = require('./lib/objectifyRoutes.js');
 global.routes = objectifyRoutes('routes');
-require(routes.index)(app);
+require('./routes/index.js')(app);
 
 var server = http.createServer(app);
 server.listen(process.env.HTTP_PORT, process.env.DOMAIN);

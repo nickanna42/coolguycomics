@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/nickanna42/coolguycomics/issues"
   },
-  "homepage": "https://github.com/nickanna42/coolguycomics#readme"
+  "homepage": "https://github.com/nickanna42/coolguycomics#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "rethinkdb": "^2.3.3"
+  }
 }

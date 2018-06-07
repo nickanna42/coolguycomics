@@ -1,3 +1,4 @@
+'use strict';
 require('dotenv').load();
 var express = require('express');
 var exphbs = require('express-handlebars');

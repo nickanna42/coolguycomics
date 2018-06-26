@@ -19,9 +19,11 @@ app.engine('.hbs', exphbs({
 
 }));
 app.set('view engine', '.hbs');
-app.use(express.static('public', {'extensions': ['html', 'htm']}));
+
 var objectifyRoutes = require('./lib/objectifyRoutes.js');
 global.routes = objectifyRoutes('routes');
+app.use(require(routes.middleware.forceHTTPS))
+app.use(express.static('public', {'extensions': ['html', 'htm']}));
 require('./routes/index.js')(app);
 
 var server = http.createServer(app);

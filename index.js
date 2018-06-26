@@ -22,7 +22,7 @@ app.set('view engine', '.hbs');
 
 var objectifyRoutes = require('./lib/objectifyRoutes.js');
 global.routes = objectifyRoutes('routes');
-app.use((routes.middleware.forceHTTPS);
+app.use(routes.middleware.forceHTTPS);
 app.use(express.static('public', {'extensions': ['html', 'htm']}));
 require('./routes/index.js')(app);
 

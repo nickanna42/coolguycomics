@@ -22,16 +22,20 @@ app.set('view engine', '.hbs');
 
 var objectifyRoutes = require('./lib/objectifyRoutes.js');
 global.routes = objectifyRoutes('routes');
-app.use(routes.middleware.forceHTTPS);
 app.use(express.static('public', {'extensions': ['html', 'htm']}));
 require('./routes/index.js')(app);
 
 var server = http.createServer(app);
 server.listen(process.env.HTTP_PORT, process.env.DOMAIN);
 
-var httpsOptions = {
-    'pfx': fs.readFileSync('./coolguycomics.pfx'),
-    'passphrase': ''
-};
-var secure_server = https.createServer(httpsOptions, app);
-secure_server.listen(443, process.env.DOMAIN);
+if (process.env.NODE_ENV == 'production') {
+    var httpsOptions = {
+        'pfx': fs.readFileSync('./coolguycomics.pfx'),
+        'passphrase': ''
+    };
+    var secure_server = https.createServer(httpsOptions, app);
+    secure_server.listen(443, process.env.DOMAIN);
+    app.use(routes.middleware.forceHTTPS);
+}
+
+console.log('server started');

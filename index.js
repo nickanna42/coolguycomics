@@ -24,7 +24,7 @@ var objectifyRoutes = require('./lib/objectifyRoutes.js');
 global.routes = objectifyRoutes('routes');
 app.use(express.static('public', {'extensions': ['html', 'htm']}));
 if (process.env.NODE_ENV == 'production') {
-  app.use(routes.middleware.forceHTTPS);
+    app.use(routes.middleware.forceHTTPS);
 }
 require('./routes/index.js')(app);
 

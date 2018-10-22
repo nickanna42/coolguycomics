@@ -23,6 +23,9 @@ app.set('view engine', '.hbs');
 var objectifyRoutes = require('./lib/objectifyRoutes.js');
 global.routes = objectifyRoutes('routes');
 app.use(express.static('public', {'extensions': ['html', 'htm']}));
+if (process.env.NODE_ENV == 'production') {
+  app.use(routes.middleware.forceHTTPS);
+}
 require('./routes/index.js')(app);
 
 var server = http.createServer(app);
@@ -35,7 +38,6 @@ if (process.env.NODE_ENV == 'production') {
     };
     var secure_server = https.createServer(httpsOptions, app);
     secure_server.listen(443, process.env.DOMAIN);
-    app.use(routes.middleware.forceHTTPS);
 }
 
 console.log('server started');
